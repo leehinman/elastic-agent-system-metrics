@@ -94,6 +94,7 @@ func FetchNumThreads(pid int) (int, error) {
 	if err != nil {
 		return 0, fmt.Errorf("PssCaptureSnapshot failed: %w", err)
 	}
+	defer PssFreeSnapshot(pHandle, snapshotHandle)
 
 	info := PssThreadInformation{}
 	buffSize := unsafe.Sizeof(info)
